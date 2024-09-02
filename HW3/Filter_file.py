@@ -19,8 +19,7 @@ def make_dr_separated_directory() -> None:
 
 def parsing_directory_extensions() -> None:
     extensions_files = user_extensions()
-    # user_input_path_to_directory = input('Input to work directory : ')
-    user_input_path_to_directory = Path('/home/rogstrix/PycharmProjects')
+    user_input_path_to_directory = input('Input to work directory : ')
     path_to_directory = Path(user_input_path_to_directory)
     if path_to_directory.exists():
         items = path_to_directory.glob('**/*')
