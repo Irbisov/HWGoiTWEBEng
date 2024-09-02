@@ -1,7 +1,7 @@
 from pathlib import Path
 from threading import Thread
-import shutil, logging, time
-from concurrent.futures import ThreadPoolExecutor
+import shutil, logging
+
 
 def user_extensions() -> str:
     args = '.PNG, .conf, .txt, .svg'
