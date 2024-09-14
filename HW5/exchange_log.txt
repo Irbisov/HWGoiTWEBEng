@@ -1,0 +1,159 @@
+2024-09-14 20:03:35.983912: Client 127.0.0.1 connected
+2024-09-14 20:03:40.286643: Command: help | Response: Available commands:
+1. `current <currency1> <currency2>` - Get current exchange rates for specified currencies.
+2. `history <days> <currency1> <currency2>` - Get historical exchange rates for the last <days> days.
+3. `exchange <days> <currency1> <currency2>` - Get exchange rates for the last <days> days.
+4. `help` - Show this help message.
+2024-09-14 20:04:32.519517: Command: exchange 5 USD | Response: [
+  {
+    "14.09.2024": {
+      "USD": {
+        "sale": 41.5,
+        "purchase": 40.9
+      }
+    }
+  },
+  {
+    "13.09.2024": {
+      "USD": {
+        "sale": 41.5,
+        "purchase": 40.9
+      }
+    }
+  },
+  {
+    "12.09.2024": {
+      "USD": {
+        "sale": 41.45,
+        "purchase": 40.85
+      }
+    }
+  },
+  {
+    "11.09.2024": {
+      "USD": {
+        "sale": 41.42,
+        "purchase": 40.82
+      }
+    }
+  },
+  {
+    "10.09.2024": {
+      "USD": {
+        "sale": 41.35,
+        "purchase": 40.75
+      }
+    }
+  }
+]
+2024-09-14 20:04:32.521445: Command: help | Response: Available commands:
+1. `current <currency1> <currency2>` - Get current exchange rates for specified currencies.
+2. `history <days> <currency1> <currency2>` - Get historical exchange rates for the last <days> days.
+3. `exchange <days> <currency1> <currency2>` - Get exchange rates for the last <days> days.
+4. `help` - Show this help message.
+2024-09-14 20:05:12.354908: Client 127.0.0.1 disconnected (reason: sent 1011 (internal error) keepalive ping timeout; no close frame received)
+2024-09-14 20:06:51.552678: Client 127.0.0.1 connected
+2024-09-14 20:07:02.923831: Command: help | Response: Available commands:
+1. `current <currency1> <currency2>` - Get current exchange rates for specified currencies.
+2. `history <days> <currency1> <currency2>` - Get historical exchange rates for the last <days> days.
+3. `exchange <days> <currency1> <currency2>` - Get exchange rates for the last <days> days.
+4. `help` - Show this help message.
+2024-09-14 20:07:41.577402: Client 127.0.0.1 disconnected (reason: sent 1011 (internal error) keepalive ping timeout; no close frame received)
+2024-09-14 20:08:36.186710: Client 127.0.0.1 connected
+2024-09-14 20:08:44.180598: Command: error | Response: 'float' object is not subscriptable
+2024-09-14 20:08:44.182521: Client 127.0.0.1 disconnected (reason: 'float' object is not subscriptable)
+2024-09-14 20:11:15.350203: Client 127.0.0.1 connected
+2024-09-14 20:11:22.308455: Command: help | Response: Available commands:
+1. `current <currency1> <currency2>` - Get current exchange rates for specified currencies.
+2. `exchange <days> <currency1> <currency2>` - Get exchange rates for the last <days> days.
+3. `help` - Show this help message.
+2024-09-14 20:11:42.807195: Command: error | Response: 'float' object is not subscriptable
+2024-09-14 20:11:42.809283: Client 127.0.0.1 disconnected (reason: 'float' object is not subscriptable)
+2024-09-14 20:15:04.499126: Client 127.0.0.1 connected
+2024-09-14 20:15:49.320301: Client 127.0.0.1 connected
+2024-09-14 20:15:57.780145: Command: help | Response: Available commands:
+1. `current <currency1> <currency2>` - Get current exchange rates for specified currencies.
+2. `exchange <days> <currency1> <currency2>` - Get exchange rates for the last <days> days.
+3. `help` - Show this help message.
+2024-09-14 20:16:09.133848: Command: current USD | Response: 
+========================================
+Date: USD
+----------------------------------------
+sale: 41.50
+purchase: 40.90
+----------------------------------------
+========================================
+
+2024-09-14 20:16:27.832868: Command: current USD EUR | Response: 
+========================================
+Date: EUR
+----------------------------------------
+sale: 46.10
+purchase: 45.10
+----------------------------------------
+Date: USD
+----------------------------------------
+sale: 41.50
+purchase: 40.90
+----------------------------------------
+========================================
+
+2024-09-14 20:16:43.779824: Command: current UAR | Response: Error fetching current rates.
+2024-09-14 20:16:55.701949: Command: current UAN | Response: Error fetching current rates.
+2024-09-14 20:17:29.887704: Command: current UAH | Response: Error while fetching current rates: unsupported format string passed to NoneType.__format__
+2024-09-14 20:18:02.387922: Command: current GBR | Response: Error fetching current rates.
+2024-09-14 20:18:52.257761: Client 127.0.0.1 disconnected (reason: sent 1011 (internal error) keepalive ping timeout; no close frame received)
+2024-09-14 20:27:04.639948: Client 127.0.0.1 connected
+2024-09-14 20:27:04.694057: Client 127.0.0.1 connected
+2024-09-14 20:27:11.166381: Command: help | Response: Available commands:
+1. `current <currency1> <currency2>` - Get current exchange rates for specified currencies.
+2. `exchange <days> <currency1> <currency2>` - Get exchange rates for the last <days> days.
+3. `help` - Show this help message.
+2024-09-14 20:27:20.525128: Command: current USD | Response: Error while fetching current rates: 'str' object has no attribute 'get'
+2024-09-14 20:27:54.662590: Client 127.0.0.1 disconnected (reason: sent 1011 (internal error) keepalive ping timeout; no close frame received)
+2024-09-14 20:27:54.698622: Client 127.0.0.1 disconnected (reason: sent 1011 (internal error) keepalive ping timeout; no close frame received)
+2024-09-14 20:28:47.460231: Client 127.0.0.1 connected
+2024-09-14 20:28:49.918414: Command: error | Response: Error processing command '': list index out of range
+2024-09-14 20:28:49.921828: Command: error | Response: Error processing command '': list index out of range
+2024-09-14 20:28:49.924392: Command: error | Response: Error processing command '': list index out of range
+2024-09-14 20:28:49.927047: Command: error | Response: Error processing command '': list index out of range
+2024-09-14 20:28:49.929245: Command: error | Response: Error processing command '        ': list index out of range
+2024-09-14 20:28:49.933801: Command: error | Response: Error processing command '': list index out of range
+2024-09-14 20:28:49.935990: Command: error | Response: Error processing command '': list index out of range
+2024-09-14 20:28:49.938227: Command: error | Response: Error processing command '': list index out of range
+2024-09-14 20:28:49.941316: Command: error | Response: Error processing command '': list index out of range
+2024-09-14 20:28:49.944450: Command: error | Response: Error processing command '': list index out of range
+2024-09-14 20:28:55.870271: Command: help | Response: Available commands:
+1. `current <currency1> <currency2>` - Get current exchange rates for specified currencies.
+2. `exchange <days> <currency1> <currency2>` - Get exchange rates for the last <days> days.
+3. `help` - Show this help message.
+2024-09-14 20:29:01.936380: Command: current USD | Response: Error fetching current rates.
+2024-09-14 20:29:37.489271: Client 127.0.0.1 disconnected (reason: sent 1011 (internal error) keepalive ping timeout; no close frame received)
+2024-09-14 20:30:41.490243: Client 127.0.0.1 connected
+2024-09-14 20:30:49.517148: Command: current USD | Response: Error while fetching current rates: 'str' object has no attribute 'items'
+2024-09-14 20:30:52.863337: Command: help | Response: Available commands:
+1. `current <currency1> <currency2>` - Get current exchange rates for specified currencies.
+2. `exchange <days> <currency1> <currency2>` - Get exchange rates for the last <days> days.
+3. `help` - Show this help message.
+2024-09-14 20:31:31.523567: Client 127.0.0.1 disconnected (reason: sent 1011 (internal error) keepalive ping timeout; no close frame received)
+2024-09-14 20:32:33.041551: Client 127.0.0.1 connected
+2024-09-14 20:32:48.972695: Command: current USD | Response: 
+========================================
+Date: USD
+----------------------------------------
+sale: 41.50
+purchase: 40.90
+----------------------------------------
+========================================
+
+2024-09-14 20:32:58.061940: Command: current UAH | Response: Error while fetching current rates: 'str' object has no attribute 'items'
+2024-09-14 20:33:15.772031: Command: current GBP | Response: 
+========================================
+Date: GBP
+----------------------------------------
+sale: 54.51
+purchase: 53.70
+----------------------------------------
+========================================
+
+2024-09-14 20:33:48.095967: Client 127.0.0.1 disconnected (reason: sent 1011 (internal error) keepalive ping timeout; no close frame received)
