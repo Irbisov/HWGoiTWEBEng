@@ -1,0 +1,19 @@
+# Use postgres/example user/password credentials
+version: '3.9'
+
+services:
+
+  db:
+    image: postgres
+    restart: always
+    environment:
+      POSTGRES_PASSWORD: 280992
+      POSTGRES_USER: mr.green
+      POSTGRES_DB: my_database
+    volumes:
+      - pgdata:/vat/lib/paosgresql/data
+    ports:
+      - "5432:5432"
+
+volumes:
+  pgdata:
