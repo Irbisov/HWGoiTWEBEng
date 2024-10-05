@@ -1,0 +1,16 @@
+version: '3.8'
+services:
+  db:
+    image: postgres:latest
+    environment:
+      POSTGRES_USER: mr.green
+      POSTGRES_PASSWORD: 280992
+      POSTGRES_DB: dbhw7
+    ports:
+      - "5433:5432"
+  app:
+    build: .
+    depends_on:
+      - db
+    environment:
+      DATABASE_URL: "postgresql://mr.green:280992@db:5432/dbhw7"
