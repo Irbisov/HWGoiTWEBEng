@@ -104,7 +104,7 @@ def list_subjects(session):
 def read_subject(session, subject_id):
     subject = session.query(Subject).filter_by(subject_id=subject_id).first()
     if subject:
-        print(f"Предмет з ID {subject_id}: {subject.subject_name}")
+        print(f"Предмет з ID {subject_id}: {subject.subjects}")
     else:
         print(f"Предмет з ID {subject_id} не знайдений")
 
@@ -113,7 +113,7 @@ def read_subject(session, subject_id):
 def update_subject(session, subject_id, subject_name):
     s = session.query(Subject).filter_by(subject_id=subject_id).first()
     if s:
-        s.subject_name = subject_name
+        s.subjects = subject_name
         session.commit()
         print(f"Предмет з ID {subject_id} оновлено")
     else:
@@ -205,14 +205,23 @@ def read_mark(session, mark_id):
 
 
 @session_manager
-def update_mark(session, mark_id, grade):
+def update_mark(session, mark_id, grade, student_id, subject_id, date_of):
+    # Знайти запис за ID
     m = session.query(Mark).filter_by(mark_id=mark_id).first()
+
     if m:
+        # Оновити відповідні поля
         m.grade = grade
+        m.student_id = student_id
+        m.subject_id = subject_id
+        m.date_of = date_of
+
+        # Зберегти зміни
         session.commit()
         print(f"Оцінка з ID {mark_id} оновлена")
     else:
         print(f"Оцінка з ID {mark_id} не знайдена")
+
 
 
 @session_manager
@@ -268,15 +277,28 @@ def read_student(session, student_id):
 
 
 @session_manager
-def update_student(session, student_id, **kwargs):
+def update_student(session, student_id, first_name, last_name, email, age, city, phone, group_id, gender_id, birth_date):
+    # Знайти запис за ID студента
     student = session.query(Student).filter_by(student_id=student_id).first()
+
     if student:
-        for key, value in kwargs.items():
-            setattr(student, key, value)
+        # Оновлення полів студента
+        student.first_name = first_name
+        student.last_name = last_name
+        student.email = email
+        student.age = age
+        student.city = city
+        student.phone = phone
+        student.group_id = group_id
+        student.gender_id = gender_id
+        student.birth_date = birth_date
+
+        # Збереження змін
         session.commit()
         print(f"Студент з ID {student_id} оновлений")
     else:
         print(f"Студент з ID {student_id} не знайдений")
+
 
 
 @session_manager
@@ -300,7 +322,7 @@ def list_teachers(session):
 
 @session_manager
 def read_teacher(session, teacher_id):
-    teacher = session.query(Teacher).filter_by(teacher_id=teacher_id).first()
+    teacher = session.query(Teacher).filter_by(teachers_id=teacher_id).first()
     if teacher:
         print(f"Вчитель з ID {teacher_id}: {teacher.first_name} {teacher.last_name}, email: {teacher.email}")
     else:
@@ -308,15 +330,27 @@ def read_teacher(session, teacher_id):
 
 
 @session_manager
-def update_teacher(session, teacher_id, **kwargs):
-    teacher = session.query(Teacher).filter_by(teacher_id=teacher_id).first()
+def update_teacher(session, teacher_id, first_name, last_name, email, phone, address, birth_date, age, subject_id):
+    # Знайти запис за ID вчителя
+    teacher = session.query(Teacher).filter_by(teachers_id=teacher_id).first()
+
     if teacher:
-        for key, value in kwargs.items():
-            setattr(teacher, key, value)
+        # Оновлення полів вчителя
+        teacher.first_name = first_name
+        teacher.last_name = last_name
+        teacher.email = email
+        teacher.phone = phone
+        teacher.address = address
+        teacher.birth_date = birth_date
+        teacher.age = age
+        teacher.subject_id = subject_id
+
+        # Збереження змін
         session.commit()
         print(f"Вчитель з ID {teacher_id} оновлений")
     else:
         print(f"Вчитель з ID {teacher_id} не знайдений")
+
 
 
 @session_manager
@@ -350,7 +384,7 @@ def create_teacher(session, first_name, last_name, email, phone, address, birth_
 def main():
     parser = argparse.ArgumentParser(description="Система управління студентами")
 
-    parser.add_argument('-c', '--command', choices=['create', 'read', 'update', 'delete', 'list', 'help'],
+    parser.add_argument('-a', '--action', choices=['create', 'read', 'update', 'delete', 'list', 'help'],
                         help="Команда, яку потрібно виконати.", required=True)
     parser.add_argument('-t', '--type', choices=['student', 'gender', 'group', 'mark', 'subject', 'teacher'],
                         help='Тип об\'єкта.', required=True)
