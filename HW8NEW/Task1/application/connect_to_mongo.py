@@ -1,10 +1,13 @@
+import os
 from mongoengine import connect
+from dotenv import load_dotenv
 
+# Завантаження змінних середовища з .env файлу
+load_dotenv()
 
 def connect_mongo():
     connect(
-        db="mydb",
-        host="mongodb+srv://barabaca:280992@cluster0.xik54.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0",
+        db=os.getenv("MONGO_DB"),
+        host=f"mongodb+srv://{os.getenv('MONGO_USERNAME')}:{os.getenv('MONGO_PASSWORD')}@cluster0.xik54.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0",
         ssl=True,
-
     )

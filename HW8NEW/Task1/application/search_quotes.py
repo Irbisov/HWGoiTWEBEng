@@ -1,9 +1,10 @@
 import json
 import logging
 import redis
-from mongoengine import connect, DoesNotExist, QuerySet
 from models import Author, Quote
 from connect_to_mongo import connect_mongo
+
+
 
 # Налаштування логування
 logging.basicConfig(level=logging.INFO, format='%(asctime)s - %(levelname)s - %(message)s')
