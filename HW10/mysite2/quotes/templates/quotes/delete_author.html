@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="uk">
+{% extends "base.html" %}
+
+{% block content %}
+<head>
+
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Видалити автора</title>
+</head>
+<body>
+    <h1>Видалити автора</h1>
+    <p>Ви дійсно бажаєте видалити автора "{{ author.name }}"?</p>
+    <form method="post">
+        {% csrf_token %}
+        <button type="submit">Видалити</button>
+        <a href="{% url 'author_list' %}">Скасувати</a>
+    </form>
+</body>
+</html>
+{% endblock %}

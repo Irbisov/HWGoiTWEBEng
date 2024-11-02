@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Головна - Мій сайт</title>
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+</head>
+<body>
+    <header>
+        <h1>Ласкаво просимо на мій сайт</h1>
+        <nav>
+            <ul>
+                <li>
+                    <form action="{% url 'home' %}">
+                        <button type="submit">Головна</button>
+                    </form>
+                </li>
+                <li>
+                    <form action="{% url 'author_list' %}">
+                        <button type="submit">Список авторів</button>
+                    </form>
+                </li>
+                <li>
+                    <form action="{% url 'quote_list' %}">
+                        <button type="submit">Список цитат</button>
+                    </form>
+                </li>
+                {% if user.is_authenticated %}
+                    <li>
+                        <form action="{% url 'add_author' %}">
+                            <button type="submit">Додати автора</button>
+                        </form>
+                    </li>
+                    <li>
+                        <form action="{% url 'add_quote' %}">
+                            <button type="submit">Додати цитату</button>
+                        </form>
+                    </li>
+                    <li>
+                        <form method="post" action="{% url 'logout' %}">
+                            {% csrf_token %}
+                            <button type="submit">Вихід</button>
+                        </form>
+                    </li>
+                {% else %}
+                    <li>
+                        <form action="{% url 'login' %}">
+                            <button type="submit">Вхід</button>
+                        </form>
+                    </li>
+                    <li>
+                        <form action="{% url 'signup' %}">
+                            <button type="submit">Реєстрація</button>
+                        </form>
+                    </li>
+                {% endif %}
+            </ul>
+        </nav>
+    </header>
+
+    <main>
+        <h2>Останні цитати</h2>
+        <ul>
+            {% for quote in quotes %}
+                <li>
+                    <strong>{{ quote.text }}</strong> - {{ quote.author.name }}
+                </li>
+            {% empty %}
+                <li>Цитат поки що немає.</li>
+            {% endfor %}
+        </ul>
+    </main>
+
+    <footer>
+        <p>&copy; {{ current_year }} Мій сайт. Всі права захищені.</p>
+    </footer>
+</body>
+</html>

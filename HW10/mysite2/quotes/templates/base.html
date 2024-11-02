@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %}Мій сайт{% endblock %}</title>
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+</head>
+<body>
+    <header>
+        <nav>
+            <ul>
+                <li>
+                    <form action="{% url 'home' %}">
+                        <button type="submit">Головна</button>
+                    </form>
+                </li>
+                <li>
+                    <form action="{% url 'author_list' %}">
+                        <button type="submit">Список авторів</button>
+                    </form>
+                </li>
+                <li>
+                    <form action="{% url 'quote_list' %}">
+                        <button type="submit">Список цитат</button>
+                    </form>
+                </li>
+            </ul>
+        </nav>
+    </header>
+
+    <main>
+        {% block content %}
+        {% endblock %}
+    </main>
+
+    <footer>
+        <p>&copy; 2024 Мій сайт</p>
+    </footer>
+</body>
+</html>

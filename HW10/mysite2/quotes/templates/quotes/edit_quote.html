@@ -1,0 +1,11 @@
+<!-- quotes/templates/quotes/edit_quote.html -->
+{% extends "base.html" %}
+
+{% block content %}
+  <h2>Редагувати цитату</h2>
+  <form method="post">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <button type="submit">Зберегти зміни</button>
+  </form>
+{% endblock %}

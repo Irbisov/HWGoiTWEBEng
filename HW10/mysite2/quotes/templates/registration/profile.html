@@ -1,0 +1,13 @@
+<!-- templates/registration/profile.html -->
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+    <meta charset="UTF-8">
+    <title>Профіль користувача</title>
+</head>
+<body>
+    <h2>Профіль: {{ user.username }}</h2>
+    <p>Ласкаво просимо на вашу сторінку профілю!</p>
+    <a href="{% url 'logout' %}">Вийти</a>  <!-- або інший маршрут -->
+</body>
+</html>
