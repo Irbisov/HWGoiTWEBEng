@@ -1,0 +1,15 @@
+{% extends "base.html" %}
+
+{% block content %}
+    <h1>Цитати з тегом: {{ tag.name }}</h1>
+
+    <ul>
+        {% for quote in quotes %}
+            <li>
+                <strong>{{ quote.text }}</strong> — {{ quote.author__name }}
+            </li>
+        {% empty %}
+            <li>Цитат з таким тегом немає.</li>
+        {% endfor %}
+    </ul>
+{% endblock %}

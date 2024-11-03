@@ -1,15 +1,12 @@
-<!DOCTYPE html>
-<html lang="uk">
 {% extends "base.html" %}
 
 {% block content %}
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Список цитат</title>
-</head>
-<body>
     <h1>Список цитат</h1>
+    <form action="{% url 'search_quotes_by_tag' %}" method="get">
+        <input type="text" name="tag" placeholder="Введіть назву тега" required>
+        <button type="submit">Пошук</button>
+    </form>
+
     <ul>
         {% for quote in quotes %}
             <li>
@@ -19,7 +16,9 @@
                     <div>
                         <strong>Теги:</strong>
                         {% for tag in quote.tags.all %}
-                            <span class="badge bg-secondary">{{ tag.name }}</span>
+                            <a href="{% url 'quotes_by_tag' tag.name %}">
+                                <span class="badge bg-secondary">{{ tag.name }}</span>
+                            </a>
                         {% endfor %}
                     </div>
                 {% endif %}
@@ -39,6 +38,22 @@
             <li>Цитат поки що немає.</li>
         {% endfor %}
     </ul>
-</body>
-</html>
+
+    <div class="pagination">
+        <span class="step-links">
+            {% if page_obj.has_previous %}
+                <a href="?page=1">&laquo; перша</a>
+                <a href="?page={{ page_obj.previous_page_number }}">Попередня</a>
+            {% endif %}
+
+            <span class="current">
+                Сторінка {{ page_obj.number }} з {{ page_obj.paginator.num_pages }}.
+            </span>
+
+            {% if page_obj.has_next %}
+                <a href="?page={{ page_obj.next_page_number }}">Наступна</a>
+                <a href="?page={{ page_obj.paginator.num_pages }}">&raquo; остання</a>
+            {% endif %}
+        </span>
+    </div>
 {% endblock %}

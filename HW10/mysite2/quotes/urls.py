@@ -3,9 +3,9 @@ from . import views
 from django.contrib.auth import views as auth_views
 
 urlpatterns = [
-    # Основні сторінки
-    path('', views.quote_list, name='quote_list'),
-    path('home/', views.home_view, name='home'),
+    # Основна сторінка
+    path('', views.home_view, name='home'),  # Переконайтеся, що ім'я співпадає з шаблоном
+    path('quotes/', views.quote_list, name='quote_list'),  # Залишаємо цей маршрут як головний список цитат
 
     # Авторизація та профіль
     path('login/', auth_views.LoginView.as_view(), name='login'),
@@ -18,6 +18,8 @@ urlpatterns = [
     path('quotes/<int:id>/', views.quote_detail, name='quote_detail'),
     path('quotes/edit/<int:id>/', views.edit_quote, name='edit_quote'),
     path('quotes/delete/<int:id>/', views.delete_quote, name='delete_quote'),
+    path('tags/<str:tag_name>/', views.quotes_by_tag, name='quotes_by_tag'),
+    path('search/', views.search_quotes_by_tag, name='search_quotes_by_tag'),
 
     # Маршрути для авторів
     path('authors/', views.author_list, name='author_list'),
@@ -25,4 +27,5 @@ urlpatterns = [
     path('authors/<int:id>/', views.author_detail, name='author_detail'),
     path('authors/edit/<int:id>/', views.edit_author, name='edit_author'),
     path('authors/delete/<int:id>/', views.delete_author, name='delete_author'),
+    path('search_author/', views.search_quotes_by_author, name='search_quotes_by_author'),
 ]

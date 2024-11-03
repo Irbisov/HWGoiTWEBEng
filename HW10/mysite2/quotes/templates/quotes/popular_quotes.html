@@ -1,0 +1,12 @@
+<main>
+    <h2>Останні цитати</h2>
+    <ul>
+        {% for quote in popular_quotes %}
+            <li>
+                <strong>{{ quote.text }}</strong> - {{ quote.author.name }} ({{ quote.tags.count }} теги)
+            </li>
+        {% empty %}
+            <li>Цитат поки що немає.</li>
+        {% endfor %}
+    </ul>
+</main>

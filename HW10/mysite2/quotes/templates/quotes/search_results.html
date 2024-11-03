@@ -1,0 +1,17 @@
+{% extends "base.html" %}
+
+{% block content %}
+    <h1>Результати пошуку для тега: "{{ query }}"</h1>
+
+    {% if quotes %}
+        <ul>
+            {% for quote in quotes %}
+                <li>
+                    <strong>{{ quote.text }}</strong> — {{ quote.author.name }}
+                </li>
+            {% endfor %}
+        </ul>
+    {% else %}
+        <p>Цитат з таким тегом не знайдено.</p>
+    {% endif %}
+{% endblock %}

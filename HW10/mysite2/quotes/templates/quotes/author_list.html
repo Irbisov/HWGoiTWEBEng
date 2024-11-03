@@ -8,6 +8,11 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Список авторів</title>
+    <form action="{% url 'search_quotes_by_author' %}" method="get">
+    <input type="text" name="author" placeholder="Введіть ім'я автора" required>
+    <button type="submit">Пошук</button>
+    </form>
+
 </head>
 <body>
     <h1>Список авторів</h1>

@@ -1,10 +1,10 @@
-from datetime import datetime
+from django.core.paginator import Paginator
 from django.contrib.auth.forms import UserCreationForm
-from django.contrib.auth import login
 from .forms import UserRegistrationForm, QuoteForm, AuthorForm
 from django.contrib.auth.decorators import login_required
 from django.shortcuts import redirect, render, get_object_or_404
-from .models import Author, Quote
+from .models import Author, Quote, Tag
+from django.db.models import Count
 
 
 def register(request):
@@ -47,13 +47,62 @@ def add_author(request):
 
 
 def quote_list(request):
+    # Отримання всіх цитат
     quotes = Quote.objects.all()
-    return render(request, 'quotes/quote_list.html', {'quotes': quotes})
+
+    # Фільтрація за тегами, якщо тег передано в запиті
+    tag = request.GET.get('tag')
+    if tag:
+        quotes = quotes.filter(tags__name__iexact=tag)
+
+    # Пагінація
+    paginator = Paginator(quotes, 10)  # 10 цитат на сторінку
+    page_number = request.GET.get('page')
+    page_obj = paginator.get_page(page_number)
+
+    # Передача контексту в шаблон
+    context = {
+        'quotes': page_obj,
+        'page_obj': page_obj,
+    }
+    return render(request, 'quotes/quote_list.html', context)
 
 
 def author_list(request):
     authors = Author.objects.all()
     return render(request, 'quotes/author_list.html', {'authors': authors})
+
+
+def search_quotes_by_author(request):
+    query = request.GET.get('author', '')
+    quotes = []
+    if query:
+        try:
+            author = Author.objects.get(name__icontains=query)
+            quotes = Quote.objects.filter(author=author).distinct()
+        except Author.DoesNotExist:
+            quotes = []
+
+    return render(request, 'quotes/search_author_results.html', {'quotes': quotes, 'query': query})
+
+
+def quotes_by_tag(request, tag_name):
+    tag = Tag.objects.get(name=tag_name)
+    quotes = Quote.objects.filter(tags=tag).values('text', 'author__name').distinct()
+    return render(request, 'quotes/quotes_by_tag.html', {'tag': tag, 'quotes': quotes})
+
+
+def search_quotes_by_tag(request):
+    query = request.GET.get('tag', '')
+    quotes = []
+    if query:
+        try:
+            tag = Tag.objects.get(name=query)
+            quotes = Quote.objects.filter(tags=tag).distinct()
+        except Tag.DoesNotExist:
+            quotes = []
+
+    return render(request, 'quotes/search_results.html', {'quotes': quotes, 'query': query})
 
 
 def quote_detail(request, id):
@@ -111,8 +160,22 @@ def delete_author(request, id):
 
 
 def home_view(request):
-    quotes = Quote.objects.all()
-    return render(request, 'quotes/home.html', {'quotes': quotes, 'current_year': datetime.now().year})
+    # Отримуємо топ-10 тегів за кількістю цитат через ManyToMany зв'язок у моделі Quote
+    top_tags = Tag.objects.annotate(num_quotes=Count('quote')).order_by('-num_quotes')[:10]
+
+    # Отримуємо останні 5 цитат для відображення
+    quotes = Quote.objects.all().order_by('-id')[:5]
+
+    # Поточний рік для відображення у футері
+    from datetime import datetime
+    current_year = datetime.now().year
+
+    return render(request, 'quotes/home.html', {
+        'top_tags': top_tags,
+        'quotes': quotes,
+        'current_year': current_year,
+    })
+
 
 
 def signup(request):
