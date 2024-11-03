@@ -61,16 +61,34 @@
     </header>
 
     <main>
-        <h2>Останні цитати</h2>
-        <ul>
-            {% for quote in quotes %}
-                <li>
-                    <strong>{{ quote.text }}</strong> - {{ quote.author.name }}
-                </li>
-            {% empty %}
-                <li>Цитат поки що немає.</li>
-            {% endfor %}
-        </ul>
+        <section>
+            <h3>Топ 10 тегів</h3>
+            <ul>
+                {% for tag in top_tags %}
+                    <li><a href="{% url 'quotes_by_tag' tag.name %}">{{ tag.name }}</a> ({{ tag.num_quotes }} цитат)</li>
+                {% empty %}
+                    <li>Тегів немає.</li>
+                {% endfor %}
+            </ul>
+        </section>
+
+        <section>
+            <h2>Останні цитати</h2>
+            <ul>
+                {% for quote in quotes %}
+                    <li>
+                        <strong>{{ quote.text }}</strong> - {{ quote.author.name }}
+                        <br>
+                        <em>Теги:</em>
+                        {% for tag in quote.tags.all %}
+                            <a href="{% url 'quotes_by_tag' tag.name %}">{{ tag.name }}</a>{% if not forloop.last %}, {% endif %}
+                        {% endfor %}
+                    </li>
+                {% empty %}
+                    <li>Цитат поки що немає.</li>
+                {% endfor %}
+            </ul>
+        </section>
     </main>
 
     <footer>
