@@ -1,0 +1,31 @@
+version: '3.8'
+
+services:
+  # Сервіс для PostgreSQL
+  db:
+    image: postgres:13
+    environment:
+      POSTGRES_USER: mr.gr
+      POSTGRES_PASSWORD: 280992
+      POSTGRES_DB: dbhw101
+    ports:
+      - "5432:5432"
+    restart: always
+
+  # Сервіс для MongoDB
+  mongodb:
+    image: mongo:latest
+    container_name: mongo-container
+    environment:
+      MONGO_INITDB_ROOT_USERNAME: root
+      MONGO_INITDB_ROOT_PASSWORD: example
+    ports:
+      - "27017:27017"
+    volumes:
+      - mongo-data:/data/db
+    restart: always
+
+# Волюм для зберігання даних MongoDB
+volumes:
+  mongo-data:
+    driver: local

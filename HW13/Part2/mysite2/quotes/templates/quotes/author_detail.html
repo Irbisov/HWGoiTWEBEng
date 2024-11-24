@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="uk">
+{% extends "base.html" %}
+
+{% block content %}
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Деталі автора</title>
+</head>
+<body>
+    <h1>Деталі автора - {{ author.name }}</h1>
+    <p><strong>Ім'я:</strong> {{ author.name }}</p>
+    <p><strong>Біографія:</strong> {{ author.bio }}</p>
+    <p><strong>Дата народження:</strong> {{ author.birthdate }}</p>
+
+    {% if user.is_authenticated %}
+        <!-- Кнопка редагування -->
+        <a href="{% url 'edit_author' author.id %}">
+            <button>Редагувати</button>
+        </a>
+        <!-- Кнопка видалення -->
+        <a href="{% url 'delete_author' author.id %}">
+            <button>Видалити</button>
+        </a>
+    {% endif %}
+
+    <a href="{% url 'author_list' %}">
+        <button>Повернутись до списку авторів</button>
+    </a>
+</body>
+</html>
+{% endblock %}

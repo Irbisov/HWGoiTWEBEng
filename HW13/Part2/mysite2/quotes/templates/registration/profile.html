@@ -1,0 +1,23 @@
+<!-- templates/registration/profile.html -->
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Профіль користувача</title>
+
+</head>
+<body>
+    <div class="container mt-5">
+        <h2>Профіль: {{ user.username }}</h2>
+        <p>Ласкаво просимо на вашу сторінку профілю!</p>
+        <form action="{% url 'password_reset' %}">
+            <button type="submit">Скинути пароль</button>
+        </form>
+        <form action="{% url 'home' %}">
+            <button type="submit">Головна</button>
+        </form>
+    </div>
+
+</body>
+</html>

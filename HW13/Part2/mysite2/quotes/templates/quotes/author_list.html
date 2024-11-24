@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="uk">
+{% extends "base.html" %}
+
+{% block content %}
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Список авторів</title>
+    <form action="{% url 'search_quotes_by_author' %}" method="get">
+    <input type="text" name="author" placeholder="Введіть ім'я автора" required>
+    <button type="submit">Пошук</button>
+    </form>
+
+</head>
+<body>
+    <h1>Список авторів</h1>
+    <ul>
+        {% for author in authors %}
+            <li>
+                {{ author.name }}
+                <!-- Кнопка перегляду автора -->
+                <a href="{% url 'author_detail' author.id %}">
+                    <button>Переглянути</button>
+                </a>
+
+                {% if user.is_authenticated %}
+                    <!-- Кнопка редагування автора -->
+                    <a href="{% url 'edit_author' author.id %}">
+                        <button>Редагувати</button>
+                    </a>
+                    <!-- Кнопка видалення автора -->
+                    <a href="{% url 'delete_author' author.id %}">
+                        <button>Видалити</button>
+                    </a>
+                {% endif %}
+            </li>
+        {% empty %}
+            <li>Авторів поки що немає.</li>
+        {% endfor %}
+    </ul>
+</body>
+</html>
+{% endblock %}

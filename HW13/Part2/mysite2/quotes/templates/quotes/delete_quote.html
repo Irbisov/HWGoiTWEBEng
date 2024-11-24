@@ -1,0 +1,14 @@
+<!-- quotes/templates/quotes/delete_quote.html -->
+{% extends "base.html" %}
+
+{% block content %}
+  <h2>Видалити цитату</h2>
+  <p>Ви впевнені, що хочете видалити цю цитату?</p>
+  <blockquote>{{ quote.text }}</blockquote>
+  <p><strong>Автор:</strong> {{ quote.author.name }}</p>
+  <form method="post">
+    {% csrf_token %}
+    <button type="submit">Так, видалити</button>
+    <a href="{% url 'quote_list' %}"><button type="button">Скасувати</button></a>
+  </form>
+{% endblock %}

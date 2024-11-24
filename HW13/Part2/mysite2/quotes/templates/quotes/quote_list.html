@@ -1,0 +1,59 @@
+{% extends "base.html" %}
+
+{% block content %}
+    <h1>Список цитат</h1>
+    <form action="{% url 'search_quotes_by_tag' %}" method="get">
+        <input type="text" name="tag" placeholder="Введіть назву тега" required>
+        <button type="submit">Пошук</button>
+    </form>
+
+    <ul>
+        {% for quote in quotes %}
+            <li>
+                <strong>{{ quote.text }}</strong> - {{ quote.author.name }}
+
+                {% if quote.tags.exists %}
+                    <div>
+                        <strong>Теги:</strong>
+                        {% for tag in quote.tags.all %}
+                            <a href="{% url 'quotes_by_tag' tag.name %}">
+                                <span class="badge bg-secondary">{{ tag.name }}</span>
+                            </a>
+                        {% endfor %}
+                    </div>
+                {% endif %}
+
+                {% if user.is_authenticated %}
+                    <!-- Кнопка редагування -->
+                    <a href="{% url 'edit_quote' quote.id %}">
+                        <button>Редагувати</button>
+                    </a>
+                    <!-- Кнопка видалення -->
+                    <a href="{% url 'delete_quote' quote.id %}">
+                        <button>Видалити</button>
+                    </a>
+                {% endif %}
+            </li>
+        {% empty %}
+            <li>Цитат поки що немає.</li>
+        {% endfor %}
+    </ul>
+
+    <div class="pagination">
+        <span class="step-links">
+            {% if page_obj.has_previous %}
+                <a href="?page=1">&laquo; перша</a>
+                <a href="?page={{ page_obj.previous_page_number }}">Попередня</a>
+            {% endif %}
+
+            <span class="current">
+                Сторінка {{ page_obj.number }} з {{ page_obj.paginator.num_pages }}.
+            </span>
+
+            {% if page_obj.has_next %}
+                <a href="?page={{ page_obj.next_page_number }}">Наступна</a>
+                <a href="?page={{ page_obj.paginator.num_pages }}">&raquo; остання</a>
+            {% endif %}
+        </span>
+    </div>
+{% endblock %}
