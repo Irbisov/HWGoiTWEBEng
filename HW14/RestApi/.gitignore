@@ -1,0 +1,32 @@
+# Python bytecode files
+__pycache__/
+*.py[cod]
+*.pyo
+*.pyd
+
+# Virtual environments
+env/
+venv/
+.Python
+*.env
+*.venv
+
+# Poetry files
+poetry.lock
+dist/
+*.tar.gz
+
+# Logs
+*.log
+
+# SQLite database files
+*.sqlite
+*.db
+
+# IDE files
+.vscode/
+.idea/
+
+# System files
+.DS_Store
+Thumbs.db
